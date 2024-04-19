@@ -1,6 +1,12 @@
 {{> layout}}
 <link rel="stylesheet" type="text/css" href="/css/styles.css">
-<div class="about-body">
+<script>
+        // Function to display popup message
+        function displayPopup() {
+            alert("Not yet implemented!");
+        }
+    </script>
+<div class="main-content">
     <section>
         <h2>About Us</h2>
         <p>The Scottish Pantry Network (TSPN) is a community-driven initiative that aims to tackle food waste and promote sustainable living. We are proud to work with local authorities, network members, and collective pantry members to make a positive impact in our communities.</p>
@@ -27,16 +33,17 @@
             <input type="text" id="name" name="name" required>
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
-            <button type="submit">Subscribe Now</button>
+            <!-- Use onclick attribute to call the displayPopup function -->
+            <button type="button" onclick="displayPopup()">Subscribe Now</button>
         </form>
     </section>
 </div>
 <!-- Footer Section -->
-        <footer>
-            <div class="container">
-                <p>&copy; 2024 The Scottish Pantry Network. All rights reserved.</p>
-                <div class="social">
-                    <!-- Add social media icons/links here if applicable -->
-                </div>
-            </div>
-        </footer>
+<footer>
+    <div class="container">
+        <p>&copy; 2024 The Scottish Pantry Network. All rights reserved.</p>
+        <div class="social">
+            <!-- Add social media icons/links here if applicable -->
+        </div>
+    </div>
+</footer>

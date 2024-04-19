@@ -18,58 +18,61 @@ class UserDAO {
     }
 
     init() {
-        this.db.insert({
-            forename: 'Peter',
-            surname: 'Smith',
-            email: 'peter@example.com',
-            password: '$2b$10$I82WRFuGghOMjtu3LLZW9OAMrmYOlMZjEEkh.vx.K2MM05iu5hY2C'
-        });
+        // Insert initial users
+        const users = [
+            {
+                forename: 'Peter',
+                surname: 'Smith',
+                email: 'peter@example.com',
+                password: '$2b$10$I82WRFuGghOMjtu3LLZW9OAMrmYOlMZjEEkh.vx.K2MM05iu5hY2C' // Password: password1
+            },
+            {
+                forename: 'Ann',
+                surname: 'Johnson',
+                email: 'ann@example.com',
+                password: '$2b$10$bnEYkqZM.MhEF/LycycymOeVwkQONq8kuAUGx6G5tF9UtUcaYDs3S' // Password: password2
+            }
+        ];
 
-        this.db.insert({
-            forename: 'Ann',
-            surname: 'Johnson',
-            email: 'ann@example.com',
-            password: '$2b$10$bnEYkqZM.MhEF/LycycymOeVwkQONq8kuAUGx6G5tF9UtUcaYDs3S'
+        this.db.insert(users, (err, newDocs) => {
+            if (err) {
+                console.error('Error inserting initial users:', err);
+            } else {
+                console.log('Initial users inserted:', newDocs);
+            }
         });
-
-        return this;
     }
 
     create(forename, surname, email, password, callback) {
-        bcrypt.hash(password, 10, (err, hash) => {
-          if (err) {
-            console.error('Error hashing password:', err);
-            callback(null);
-            return;
-          }
-      
-          const user = { forename, surname, email, password: hash };
-          this.db.insert(user, (err, newUser) => {
+        bcrypt.hash(password, saltRounds, (err, hash) => {
             if (err) {
-              console.error('Error inserting user into database:', err);
-              callback(null);
-              return;
-            }
-      
-            callback(newUser);
-          });
-        });
-      }
-
-    lookup(user, cb) {
-        this.db.find({ 'email': user }, function(err, entries) {
-            if (err) {
-                return cb(null, null);
+                console.error('Error hashing password:', err);
+                callback(null);
             } else {
-                if (entries.length == 0) {
-                    return cb(null, null);
-                }
-                return cb(null, entries[0]);
+                const user = { forename, surname, email, password: hash };
+                this.db.insert(user, (err, newUser) => {
+                    if (err) {
+                        console.error('Error inserting user into database:', err);
+                        callback(null);
+                    } else {
+                        callback(newUser);
+                    }
+                });
+            }
+        });
+    }
+
+    lookup(email, cb) {
+        this.db.findOne({ email }, (err, user) => {
+            if (err || !user) {
+                cb(null);
+            } else {
+                cb(user);
             }
         });
     }
 }
 
-const dao = new UserDAO();
-dao.init();
+const dao = new UserDAO('../database/tspn.db');
+dao.init(); // Initialize the database with initial users
 module.exports = dao;

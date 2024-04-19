@@ -1,0 +1,29 @@
+{{> layout}}
+<link rel="stylesheet" type="text/css" href="/css/styles.css">
+<div class="main-content">
+    <section>
+        <h1>Pantry Registration</h1>
+        <form action="/register" method="POST">
+            <label for="pantryName">Pantry Name:</label>
+            <input type="text" id="pantryName" name="pantryName" required>
+
+            <label for="pantryEmail">Pantry Email:</label>
+            <input type="email" id="pantryEmail" name="pantryEmail" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="Password must be at least 8 characters long and contain at least one letter and one number">
+            
+            <input type="submit" value="Register">
+        </form>
+    </section>
+</div>
+
+<!-- Footer Section -->
+<footer>
+    <div class="container">
+        <p>&copy; 2024 The Scottish Pantry Network. All rights reserved.</p>
+        <div class="social">
+            <!-- Add social media icons/links here if applicable -->
+        </div>
+    </div>
+</footer>

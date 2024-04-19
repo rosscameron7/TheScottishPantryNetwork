@@ -1,0 +1,36 @@
+{{> layout}}
+<link rel="stylesheet" type="text/css" href="/css/styles.css">
+<div class="main-content">
+    <section>
+        <h1>Register</h1>
+        <form action="/register" method="POST">
+            <label for="forename">Forename:</label>
+            <input type="text" id="forename" name="forename" required>
+            
+            <label for="surname">Surname:</label>
+            <input type="text" id="surname" name="surname" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            
+            <input type="submit" value="Register">
+        </form>
+    </section>
+    <section>
+        <p>Registering as a pantry?</p>
+        <a href="/views/pantryRegister.mustache">Click Here</a>
+    </section>
+</div>
+
+<!-- Footer Section -->
+<footer>
+    <div class="container">
+        <p>&copy; 2024 The Scottish Pantry Network. All rights reserved.</p>
+        <div class="social">
+            <!-- Add social media icons/links here if applicable -->
+        </div>
+    </div>
+</footer>
